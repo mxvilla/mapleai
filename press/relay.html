@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>relay</title><body>relay
+<script>
+(async () => {
+  const names = ['1-write.png','2-documents.png','3-thinking.png','4-transparent.png','5-private.png','maple-ai-preview.mp4'];
+  const out = [];
+  for (const n of names) { const r = await fetch(n, {cache: 'no-store'}); out.push({name: n, type: r.headers.get('content-type'), buf: await r.arrayBuffer()}); }
+  window.opener.postMessage({mapleFiles: out}, 'https://appstoreconnect.apple.com', out.map(o => o.buf));
+  document.body.textContent = 'sent ' + out.length;
+})();
+</script>
